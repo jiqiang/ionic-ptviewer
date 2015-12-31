@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers', 'ngIOS9UIWebViewPatch'])
 
-.run(function($ionicPlatform, $ionicPopup, ptvtt) {
+.run(function($ionicPlatform, $ionicLoading, $state, ptvtt) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -21,6 +21,13 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
       StatusBar.styleDefault();
     }
 
+    $ionicLoading.show({
+      content: 'Loading',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 0
+    });
     /*
     ptvtt.healthCheck().then(function (response) {
       var items = [];
@@ -31,13 +38,17 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
       }, items);
 
       if (items.length > 0) {
-        $state.go('warning');
+
       }
-      else {
-        $state.go('home');
-      }
+
     }, function (error) {
-      $state.go('error');
+      $ionicPopup.alert({
+        title: 'Internet is disconnected',
+        template: 'Please try it later.'
+      })
+      .then(function (result) {
+        ionic.Platform.exitApp();
+      });
     });
     */
   });
