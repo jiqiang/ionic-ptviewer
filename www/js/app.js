@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers', 'ngIOS9UIWebViewPatch'])
 
-.run(function($ionicPlatform, $state, ptvtt) {
+.run(function($ionicPlatform, $ionicPopup, ptvtt) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -20,6 +20,7 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
     /*
     ptvtt.healthCheck().then(function (response) {
       var items = [];
