@@ -3,9 +3,9 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('ptviewer', ['ionic'])
+angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers', 'ngIOS9UIWebViewPatch'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $state, ptvtt) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -20,5 +20,42 @@ angular.module('ptviewer', ['ionic'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+    /*
+    ptvtt.healthCheck().then(function (response) {
+      var items = [];
+      angular.forEach(response.data, function (value, key) {
+        if (!value) {
+          this.push(key);
+        }
+      }, items);
+
+      if (items.length > 0) {
+        $state.go('warning');
+      }
+      else {
+        $state.go('home');
+      }
+    }, function (error) {
+      $state.go('error');
+    });
+    */
   });
 })
+
+.config(function ($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('home', {
+      url: "/home",
+      templateUrl: 'templates/home.html'
+    })
+    .state('error', {
+      url: "/error",
+      templateUrl: 'templates/error.html'
+    })
+    .state('warning', {
+      url: "/warning",
+      templateUrl: 'templates/warning.html'
+    });
+
+  $urlRouterProvider.otherwise('home');
+});
