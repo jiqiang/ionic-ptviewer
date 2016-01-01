@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers', 'ngIOS9UIWebViewPatch'])
+angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'])
 
 .run(function($ionicPlatform, $ionicLoading, $state, ptvtt) {
   $ionicPlatform.ready(function() {
@@ -21,14 +21,6 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
       StatusBar.styleDefault();
     }
 
-    $ionicLoading.show({
-      content: 'Loading',
-      animation: 'fade-in',
-      showBackdrop: true,
-      maxWidth: 200,
-      showDelay: 0
-    });
-    /*
     ptvtt.healthCheck().then(function (response) {
       var items = [];
       angular.forEach(response.data, function (value, key) {
@@ -38,19 +30,16 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
       }, items);
 
       if (items.length > 0) {
-
+        $state.go('warning');
+      }
+      else {
+        $state.go('home');
       }
 
     }, function (error) {
-      $ionicPopup.alert({
-        title: 'Internet is disconnected',
-        template: 'Please try it later.'
-      })
-      .then(function (result) {
-        ionic.Platform.exitApp();
-      });
+      $state.go('error');
     });
-    */
+
   });
 })
 
@@ -69,5 +58,5 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
       templateUrl: 'templates/warning.html'
     });
 
-  $urlRouterProvider.otherwise('home');
+  //$urlRouterProvider.otherwise('home');
 });
