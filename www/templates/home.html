@@ -1,6 +1,24 @@
 <ion-view view-title="PTViewer">
+  <ion-nav-buttons side="right">
+    <button class="button" ng-click="doSomething()">
+      <i class="icon ion-{{platform}}-refresh"></i>
+    </button>
+  </ion-nav-buttons>
   <ion-content>
-    home
-    <!--<a nav-transition="{{platform}}" href="#/warning">Home</a>-->
+    <ion-pane>
+      <div class="card">
+        <a ui-sref="disruptions" class="item item-icon-right dark">
+          <i class="icon ion-{{platform}}-search"></i>
+          Disruptions
+        </a>
+      </div>
+
+      <div class="card">
+        <a ui-sref="warning" class="item item-icon-right dark">
+          <i class="icon ion-{{platform}}-search"></i>
+          Nearby stops
+        </a>
+      </div>
+    </ion-pane>
   </ion-content>
 </ion-view>

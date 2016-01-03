@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'])
 
-.run(function($ionicPlatform, $ionicLoading, $state, ptvtt) {
+.run(function($ionicPlatform, $ionicPopup, ptvtt) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -30,24 +30,27 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
       }, items);
 
       if (items.length > 0) {
-        $state.go('warning');
-      }
-      else {
-        $state.go('home');
+        $ionicPopup.alert({
+          title: '',
+          template: 'Server returns errors.'
+        });
       }
 
     }, function (error) {
-      $state.go('error');
+      $ionicPopup.alert({
+        title: 'Network Error',
+        template: 'No internet connection.'
+      });
     });
 
   });
 })
-
 .config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: "/home",
-      templateUrl: 'templates/home.html'
+      templateUrl: 'templates/home.html',
+      controller: 'HomeCtrl'
     })
     .state('error', {
       url: "/error",
@@ -55,8 +58,19 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
     })
     .state('warning', {
       url: "/warning",
-      templateUrl: 'templates/warning.html'
+      templateUrl: 'templates/warning.html',
+      controller: 'WarningCtrl'
+    })
+    .state('disruptions', {
+      url: "/disruptions",
+      templateUrl: "templates/disruptions.html",
+      controller: 'DisruptionsCtrl'
+    })
+    .state('disruptions_detail', {
+      url: "/disruptions/detail",
+      templateUrl: 'templates/disruptions.detail.html',
+      controller: 'DisruptionsDetailCtrl'
     });
 
-  //$urlRouterProvider.otherwise('home');
+  $urlRouterProvider.otherwise('home');
 });

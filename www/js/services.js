@@ -1,7 +1,8 @@
 /**
- *
+ * PTViewer services.
  */
 angular.module('ptviewer.services', [])
+
 .factory('ptvtt', ['$http', function ($http) {
   var developerId = '1000433',
 
@@ -69,7 +70,25 @@ angular.module('ptviewer.services', [])
 
     function lines (mode, name) {}
 
-    function disruptions (modes) {}
+    function disruptions (modes) {
+      return call(
+        endpoint(
+          '/v2/disruptions/modes/@modes'.replace(/@modes/g, modes.join(','))
+        )
+      );
+    }
+
+    function disruptionModes () {
+      return [
+        {key: 'general', name: 'General', checked: true},
+        {key: 'metro-bus', name: 'Metro bus', checked: true},
+        {key: 'metro-tram', name: 'Metro tram', checked: true},
+        {key: 'metro-train', name: 'Metro train', checked: true},
+        {key: 'regional-bus', name: 'Regional bus', checked: true},
+        {key: 'regional-coach', name: 'Regional coach', checked: true},
+        {key: 'regional-train', name: 'Regional train', checked: true}
+      ];
+    }
 
   return {
     healthCheck: healthCheck,
@@ -81,7 +100,8 @@ angular.module('ptviewer.services', [])
     stoppingPattern: stoppingPattern,
     lineStops: lineStops,
     lines: lines,
-    disruptions: disruptions
+    disruptions: disruptions,
+    disruptionModes: disruptionModes
   };
 
 }]);
