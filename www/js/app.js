@@ -21,6 +21,7 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
       StatusBar.styleDefault();
     }
 
+    /*
     ptvtt.healthCheck().then(function (response) {
       var items = [];
       angular.forEach(response.data, function (value, key) {
@@ -42,7 +43,7 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
         template: 'No internet connection.'
       });
     });
-
+    */
   });
 })
 .config(function ($stateProvider, $urlRouterProvider) {
@@ -62,12 +63,18 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
       controller: 'WarningCtrl'
     })
     .state('disruptions', {
+      abstract: true,
       url: "/disruptions",
       templateUrl: "templates/disruptions.html",
       controller: 'DisruptionsCtrl'
     })
-    .state('disruptions_detail', {
-      url: "/disruptions/detail",
+    .state('disruptions.modes', {
+      url: "/modes",
+      templateUrl: "templates/disruptions.modes.html",
+      controller: 'DisruptionsModesCtrl'
+    })
+    .state('disruptions.detail', {
+      url: "/detail",
       templateUrl: 'templates/disruptions.detail.html',
       controller: 'DisruptionsDetailCtrl'
     });

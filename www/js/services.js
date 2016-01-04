@@ -45,7 +45,7 @@ angular.module('ptviewer.services', [])
       return $http({
         method: 'GET',
         url: endpoint,
-        timeout: 5000
+        timeout: 15000
       });
     }
 
@@ -73,7 +73,8 @@ angular.module('ptviewer.services', [])
     function disruptions (modes) {
       return call(
         endpoint(
-          '/v2/disruptions/modes/@modes'.replace(/@modes/g, modes.join(','))
+          '/v2/disruptions/modes/@modes'.replace(/@modes/g, modes.join(',')),
+          {}
         )
       );
     }

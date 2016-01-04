@@ -1,5 +1,21 @@
 <ion-view view-title="Disruptions">
   <ion-content>
-    detail
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      spinner="none"
+      on-refresh="loadDisruptions()">
+    </ion-refresher>
+    <ion-scroll direction="y">
+      <div ng-repeat="(key, mode) in disruptions">
+        <div ng-repeat="(idx, item) in mode">
+          <div class="card">
+              <div class="item item-divider">{{key}}</div>
+              <div class="item item-body">
+                {{item.description}}
+              </div>
+          </div>
+        </div>
+      </div>
+    </ion-scroll>
   </ion-content>
 </ion-view>
