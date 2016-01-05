@@ -77,6 +77,17 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
       url: "/detail",
       templateUrl: 'templates/disruptions.detail.html',
       controller: 'DisruptionsDetailCtrl'
+    })
+    .state('linesByMode', {
+      abstract: true,
+      url: "/linesByMode",
+      template: '<ion-nav-view></ion-nav-view>',
+      controller: 'LinesByModeCtrl'
+    })
+    .state('linesByMode.modes', {
+      url: "/modes",
+      templateUrl: 'templates/linesByMode.modes.html',
+      controller: 'LinesByModeModesCtrl'
     });
 
   $urlRouterProvider.otherwise('home');

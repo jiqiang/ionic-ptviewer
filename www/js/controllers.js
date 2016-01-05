@@ -57,4 +57,12 @@ angular.module("ptviewer.controllers", ['ionic', 'ptviewer.services'])
     $scope.showButton =  modes.length > 0 ? true : false;
   }
 
+}])
+
+.controller('LinesByModeCtrl', ['$scope', function ($scope) {
+
+}])
+
+.controller('LinesByModeModesCtrl', ['$scope', function ($scope) {
+
 }]);
