@@ -1,0 +1,14 @@
+<ion-view view-title="Lines">
+  <ion-content>
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      spinner="none"
+      on-refresh="loadLines()">
+    </ion-refresher>
+    <ion-list>
+      <ion-item ng-repeat="line in lines">
+        {{line.line_name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

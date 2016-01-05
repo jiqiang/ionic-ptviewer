@@ -21,8 +21,7 @@ angular.module("ptviewer.controllers", ['ionic', 'ptviewer.services'])
 
   $scope.loadDisruptions =  function () {
     $ionicLoading.show({
-      template: '<ion-spinner></ion-spinner>',
-      noBackdrop: false
+      template: 'Loading...'
     });
 
     var modes = [];
@@ -59,10 +58,27 @@ angular.module("ptviewer.controllers", ['ionic', 'ptviewer.services'])
 
 }])
 
-.controller('LinesByModeCtrl', ['$scope', function ($scope) {
-
+.controller('LinesByModeCtrl', ['$scope', 'ptvtt', function ($scope, ptvtt) {
+  $scope.lineModes = ptvtt.lineModes();
 }])
 
 .controller('LinesByModeModesCtrl', ['$scope', function ($scope) {
+
+}])
+
+.controller('LinesByModeLinesCtrl', ['$scope', '$stateParams', '$ionicLoading', 'ptvtt', function ($scope, $stateParams, $ionicLoading, ptvtt) {
+  $scope.loadLines = function () {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+
+    ptvtt.lines($stateParams.lineMode).then(function (response) {
+      $scope.lines = response.data;
+      $ionicLoading.hide();
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+  }
+
+  $scope.loadLines();
 
 }]);

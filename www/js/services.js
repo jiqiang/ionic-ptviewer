@@ -68,7 +68,11 @@ angular.module('ptviewer.services', [])
 
     function lineStops (mode, line) {}
 
-    function lines (mode, name) {}
+    function lines (mode) {
+      return call(
+        endpoint('/v2/lines/mode/@mode'.replace(/@mode/g, mode), {})
+      );
+    }
 
     function disruptions (modes) {
       return call(
@@ -91,6 +95,16 @@ angular.module('ptviewer.services', [])
       ];
     }
 
+    function lineModes () {
+      return [
+        {value: 0, name: 'Train (metropolitan)'},
+        {value: 1, name: 'Tram'},
+        {value: 2, name: 'Bus (metropolitan and regional)'},
+        {value: 3, name: 'V/Line train and coach'},
+        {value: 4, name: 'NightRider'}
+      ];
+    }
+
   return {
     healthCheck: healthCheck,
     stopNearby: stopNearby,
@@ -102,7 +116,8 @@ angular.module('ptviewer.services', [])
     lineStops: lineStops,
     lines: lines,
     disruptions: disruptions,
-    disruptionModes: disruptionModes
+    disruptionModes: disruptionModes,
+    lineModes: lineModes
   };
 
 }]);

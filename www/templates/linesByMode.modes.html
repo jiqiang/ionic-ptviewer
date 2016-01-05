@@ -1,1 +1,9 @@
-<ion-view view-title="Line Modes"></ion-view>
+<ion-view view-title="Line Modes">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="mode in lineModes" ui-sref="linesByMode.lines({lineMode: mode.value})">
+        {{mode.name}}
+      </ion-item>
+    </div>
+  <ion-content>
+</ion-view>

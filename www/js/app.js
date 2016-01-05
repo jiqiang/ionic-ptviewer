@@ -88,6 +88,11 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
       url: "/modes",
       templateUrl: 'templates/linesByMode.modes.html',
       controller: 'LinesByModeModesCtrl'
+    })
+    .state('linesByMode.lines', {
+      url: "/lines/:lineMode",
+      templateUrl: 'templates/linesByMode.lines.html',
+      controller: 'LinesByModeLinesCtrl'
     });
 
   $urlRouterProvider.otherwise('home');
