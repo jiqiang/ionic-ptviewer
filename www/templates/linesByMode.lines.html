@@ -6,7 +6,7 @@
       on-refresh="loadLines()">
     </ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="line in lines">
+      <ion-item ng-repeat="line in lines" ui-sref="linesByMode.stops({lineMode: line.route_type, lineId: line.line_id})">
         {{line.line_name}}
       </ion-item>
     </ion-list>

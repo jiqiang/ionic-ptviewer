@@ -81,4 +81,23 @@ angular.module("ptviewer.controllers", ['ionic', 'ptviewer.services'])
 
   $scope.loadLines();
 
+}])
+
+.controller('LinesByModeStopsCtrl', ['$scope', '$stateParams', '$ionicLoading', 'ptvtt', function ($scope, $stateParams, $ionicLoading, ptvtt) {
+  $scope.loadStops = function () {
+    $ionicLoading.show({
+      template: 'Loading...'
+    });
+
+    ptvtt.lineStops($stateParams.lineMode, $stateParams.lineId).then(function (response) {
+
+      $scope.stops = response.data;
+      console.log($scope.stops);
+      $ionicLoading.hide();
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+  }
+
+  $scope.loadStops();
+
 }]);

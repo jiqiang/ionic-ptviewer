@@ -66,7 +66,16 @@ angular.module('ptviewer.services', [])
 
     function stoppingPattern (mode, run, stop, datetime) {}
 
-    function lineStops (mode, line) {}
+    function lineStops (mode, line) {
+      return call(
+        endpoint(
+          '/v2/mode/@mode/line/@line/stops-for-line'
+            .replace(/@mode/g, mode)
+            .replace(/@line/g, line),
+          {}
+        )
+      );
+    }
 
     function lines (mode) {
       return call(
