@@ -83,21 +83,13 @@ angular.module("ptviewer.controllers", ['ionic', 'ptviewer.services'])
 
 }])
 
-.controller('LinesByModeStopsCtrl', ['$scope', '$stateParams', '$ionicLoading', 'ptvtt', function ($scope, $stateParams, $ionicLoading, ptvtt) {
-  $scope.loadStops = function () {
-    $ionicLoading.show({
-      template: 'Loading...'
-    });
-
-    ptvtt.lineStops($stateParams.lineMode, $stateParams.lineId).then(function (response) {
-
-      $scope.stops = response.data;
-      console.log($scope.stops);
-      $ionicLoading.hide();
-      $scope.$broadcast('scroll.refreshComplete');
-    });
-  }
-
-  $scope.loadStops();
+.controller('LinesByModeStopsCtrl', ['$scope', '$stateParams', '$ionicLoading', 'ptvtt', 'ptvmap', function ($scope, $stateParams, $ionicLoading, ptvtt, ptvmap) {
+  ptvtt.lineStops($stateParams.lineMode, $stateParams.lineId).then(function (response) {
+    var coordinates = [];
+    angular.forEach(response.data, function (stop, idx) {
+      coordinates.push({lat: stop.lat, lng: stop.lon});
+    }, coordinates);
+    ptvmap.render('line_map', coordinates);
+  });
 
 }]);

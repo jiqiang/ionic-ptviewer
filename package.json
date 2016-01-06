@@ -8,7 +8,8 @@
     "gulp-minify-css": "^0.3.0",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^2.0.4",
-    "openlayers": "^3.12.1"
+    "openlayers": "^3.12.1",
+    "polyline": "^0.2.0"
   },
   "devDependencies": {
     "bower": "^1.3.3",

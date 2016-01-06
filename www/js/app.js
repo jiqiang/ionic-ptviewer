@@ -96,7 +96,7 @@ angular.module('ptviewer', ['ionic', 'ptviewer.services', 'ptviewer.controllers'
     })
     .state('linesByMode.stops', {
       url: "/stops/:lineMode/:lineId",
-      templateUrl: 'templates/linesByMode.stops.html',
+      templateUrl: 'templates/linesByMode.map.html',
       controller: 'LinesByModeStopsCtrl'
     });
 

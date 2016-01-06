@@ -129,4 +129,32 @@ angular.module('ptviewer.services', [])
     lineModes: lineModes
   };
 
+}])
+
+.factory('ptvmap', [function () {
+
+  function addMarker (coordinate, map) {
+    var marker = new google.maps.Marker({
+      position: coordinate,
+      map: map
+    });
+  }
+
+  function render (element, coordinates) {
+    var map = new google.maps.Map(document.getElementById('line_map'), {
+      zoom: 12,
+      center: coordinates[0],
+      mapTypeId: google.maps.MapTypeId.TERRAIN,
+      streetViewControl: false,
+      mapTypeControl: false
+    });
+
+    for (var i = 0; i < coordinates.length; i++) {
+      addMarker(coordinates[i], map);
+    }
+  }
+
+  return {
+    render: render
+  }
 }]);
